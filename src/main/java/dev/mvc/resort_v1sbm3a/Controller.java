@@ -1,3 +1,4 @@
+/*
 package dev.mvc.resort_v1sbm3a;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,4 +12,4 @@ public class Controller {
   }
  
 } 
- 
+*/
