@@ -8,6 +8,7 @@
     <NAV class='top_menu'>
       <span style='padding-left: 0.5%;'></span>
       <A class='menu_link'  href='/' >힐링 리조트</A><span class='top_menu_sep'> </span>
+      <A class='menu_link'  href='/categrp/create.do'>그룹 생성</A><span class='top_menu_sep'> </span>
       <A class='menu_link'  href='/categrp/list.do'>카테고리 그룹</A><span class='top_menu_sep'> </span>
       <A class='menu_link'  href='/cate/list_all.do'>카테고리 전체 목록</A><span class='top_menu_sep'> </span>
       <A class='menu_link'  href='/cate/list_all_join.do'>카테고리 전체 목록 Join</A><span class='top_menu_sep'> </span>                
