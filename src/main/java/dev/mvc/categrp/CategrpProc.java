@@ -33,5 +33,30 @@ public class CategrpProc implements CategrpProcInter {
     list = this.categrpDAO.list_categrpno_asc();
     return list;
   }
+
+  @Override
+  public CategrpVO read(int categrpno) {
+    CategrpVO categrpVO = null;
+    categrpVO = this.categrpDAO.read(categrpno);
+    
+    return categrpVO;
+  }
+  
+  @Override
+  public int update(CategrpVO categrpVO) {
+    int cnt = 0;
+    cnt = this.categrpDAO.update(categrpVO);
+    
+    return cnt;
+  }  
+  
+  @Override
+  public int delete(int categrpno) {
+    int cnt = 0;
+    cnt = this.categrpDAO.delete(categrpno);
+    
+    return cnt;
+  } 
+    
   
 }

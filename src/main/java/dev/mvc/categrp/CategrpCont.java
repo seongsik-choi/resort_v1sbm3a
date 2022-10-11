@@ -20,7 +20,7 @@ public class CategrpCont {
   @Qualifier("dev.mvc.categrp.CategrpProc")
   private CategrpProcInter categrpProc;
   
-  public CategrpCont() {
+  public CategrpCont() { 
     System.out.println("-> CategrpCont created.");
   }
  
@@ -92,5 +92,89 @@ public class CategrpCont {
     mav.setViewName("/categrp/list"); // /WEB-INF/views/categrp/list.jsp
     return mav;
   }
+  
+  // http://localhost:9090/categrp/read_update.do
+  /**
+   * 조회 + 수정폼
+   * @param categrpno 조회할 카테고리 번호
+   * @return
+   */
+  @RequestMapping(value="/categrp/read_update.do", method=RequestMethod.GET )
+  public ModelAndView read_update(int categrpno) {
+    // request.setAttribute("categrpno", int categrpno) X
+    
+    ModelAndView mav = new ModelAndView();
+    
+    CategrpVO categrpVO = this.categrpProc.read(categrpno);
+    mav.addObject("categrpVO", categrpVO);  // request 객체에 저장
+    
+    List<CategrpVO> list = this.categrpProc.list_categrpno_asc();
+    mav.addObject("list", list);  // request 객체에 저장
+
+    mav.setViewName("/categrp/read_update"); // /WEB-INF/views/categrp/read_update.jsp 
+    return mav; // forward
+  }
+  
+  // http://localhost:9090/categrp/update.do
+  /**
+   * 수정 처리
+   * @param categrpVO
+   * @return
+   */
+  @RequestMapping(value="/categrp/update.do", method=RequestMethod.POST )
+  public ModelAndView update(CategrpVO categrpVO) {
+    // CategrpVO categrpVO <FORM> 태그의 값으로 자동 생성됨.
+    // request.setAttribute("categrpVO", categrpVO); 자동 실행
+    
+    ModelAndView mav = new ModelAndView();
+    
+    int cnt = this.categrpProc.update(categrpVO);
+    mav.addObject("cnt", cnt); // request에 저장
+    
+    mav.setViewName("/categrp/update_msg"); // update_msg.jsp
+    
+    return mav;
+  }  
+  
+  // http://localhost:9091/categrp/read_delete.do
+  /**
+   * 조회 + 삭제폼
+   * @param categrpno 조회할 카테고리 번호
+   * @return
+   */
+  @RequestMapping(value="/categrp/read_delete.do", method=RequestMethod.GET )
+  public ModelAndView read_delete(int categrpno) {
+    ModelAndView mav = new ModelAndView();
+    
+    CategrpVO categrpVO = this.categrpProc.read(categrpno); // 삭제할 자료 읽기
+    mav.addObject("categrpVO", categrpVO);  // request 객체에 저장
+    
+    List<CategrpVO> list = this.categrpProc.list_categrpno_asc();
+    mav.addObject("list", list);  // request 객체에 저장
+
+    mav.setViewName("/categrp/read_delete"); // read_delete.jsp
+    return mav;
+  }  
+  
+  // http://localhost:9091/categrp/delete.do
+  /**
+   * 삭제
+   * @param categrpno 조회할 카테고리 번호
+   * @return
+   */
+  @RequestMapping(value="/categrp/delete.do", method=RequestMethod.POST )
+  public ModelAndView delete(int categrpno) {
+    ModelAndView mav = new ModelAndView();
+    
+    CategrpVO categrpVO = this.categrpProc.read(categrpno); // 삭제 정보
+    mav.addObject("categrpVO", categrpVO);  // request 객체에 저장
+    
+    int cnt = this.categrpProc.delete(categrpno); // 삭제 처리
+    mav.addObject("cnt", cnt);  // request 객체에 저장
+    
+    mav.setViewName("/categrp/delete_msg"); // delete_msg.jsp
+
+    return mav;
+  }  
   
 }
